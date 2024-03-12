@@ -5,9 +5,8 @@ Bienvenue sur le dépôt GitHub du projet de site web pour la compétition du je
 ## Vue d'ensemble
 
 <div>
-  <img src="screenshot/login.png" width="200" height="200">
-  <img src="screenshot/dashboard.png" width="200" height="200">
-  <img src="screenshot/game.png" width="200" height="200">
+  <img src="screenshot/dashboard.png" width="400" height="200">
+  <img src="screenshot/game.png" width="400" height="200">
 <div>
 
 Ce projet intègre une interface utilisateur interactive, un système de chat, et la possibilité de jouer à Pong en ligne avec d'autres joueurs. Voici les principales technologies utilisées :
