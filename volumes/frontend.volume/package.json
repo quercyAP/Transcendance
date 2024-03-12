@@ -1,0 +1,47 @@
+{
+  "name": "front",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@cloudinary/react": "^1.11.2",
+    "@cloudinary/url-gen": "^1.14.0",
+    "@faker-js/faker": "^8.4.0",
+    "@react-three/drei": "^9.88.13",
+    "@react-three/fiber": "^8.15.16",
+    "@react-three/postprocessing": "^2.15.13",
+    "autoprefixer": "^10.4.16",
+    "bcrypt": "^5.1.1",
+    "gsap": "^3.12.3",
+    "js-cookie": "^3.0.5",
+    "materialize-css": "^1.0.0-rc.2",
+    "next": "14.0.1",
+    "next-auth": "^4.24.5",
+    "postcss": "^8.4.32",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-qr-code": "^2.0.12",
+    "sass": "^1.69.5",
+    "server-only": "^0.0.1",
+    "socket.io-client": "^4.7.2",
+    "styled-components": "^6.1.1",
+    "swiper": "^11.0.5",
+    "tailwindcss": "^3.3.6",
+    "three": "^0.158.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
+    "@types/node": "20.9.0",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/three": "^0.161.2",
+    "@types/uuid": "^9.0.8",
+    "typescript": "5.2.2"
+  }
+}

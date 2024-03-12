@@ -1,0 +1,107 @@
+.CardWrapper {
+  background: linear-gradient(
+    180deg,
+    rgba(240, 7, 129, 1) 10%,
+    rgba(131, 58, 180, 1) 20%,
+    rgba(20, 15, 103, 1) 20%,
+    rgba(16, 13, 87, 0) 80%,
+    rgb(19, 110, 223) 100%
+  );
+  box-shadow: 5px 6px 5px rgba(0, 0, 0, 1);
+
+  @apply border-t rounded-2xl h-[120px] w-[180px] p-[1.5vw] flex flex-row items-center gap-5 relative;
+
+  @apply lg:h-[200px] lg:w-[400px] lg:p-[1.5vw] lg:gap-5;
+}
+
+.Avatar {
+  border: 4px solid #ffeab5;
+  box-shadow: 2px 2px 1px rgba(0, 0, 0, 1), 2px 0px 1px rgba(0, 0, 0, 1),
+    0px 2px 1px rgba(0, 0, 0, 1), 0px 0px 5px rgba(0, 0, 0, 1);
+
+  @apply hidden;
+
+  @apply lg:w-[80px] lg:h-[80px] w-full h-full lg:block rounded-full object-cover;
+}
+
+.UserName {
+  text-transform: capitalize;
+  padding-left: 2px;
+  color: #ffeab5;
+  text-shadow: -2px 0px 1px rgba(0, 0, 0, 1), 2px 0px 1px rgba(0, 0, 0, 1),
+    0px 2px 1px rgba(0, 0, 0, 1), 0px -2px 1px rgba(0, 0, 0, 1);
+
+  @apply text-xs max-w-[80px] overflow-hidden overflow-ellipsis absolute top-[11px];
+
+  @apply lg:text-xl lg:max-w-[180px] lg:top-[20px];
+}
+
+.UserStats {
+  background: rgba(255, 0, 143, 0.8);
+  border-top: 1px solid rgba(241, 210, 249, 0.5);
+  border-bottom: 1px solid rgba(241, 210, 249, 0.5);
+  text-align: center;
+  padding: 3px;
+  border-radius: 20px;
+  height: 25px;
+  color: #ffeab5;
+  text-shadow: 0px 0px 2px rgba(77, 255, 77, 0.8);
+
+  @apply text-2xs;
+
+  @apply lg:text-xs lg:h-[25px];
+}
+
+.Title {
+  color: #ffeab5;
+
+  @apply text-xs absolute right-2 top-2;
+
+  @apply lg:text-xl lg:right-4 lg:top-4;
+}
+
+.StatList {
+  display: flex;
+
+  @apply flex flex-col justify-center mt-4 gap-1 w-[100%] h-2;
+}
+
+.CardWrapper button {
+  cursor: pointer;
+  color: #ffeab5;
+  font-size: 0.6em;
+  border: var(--clr-neon) 1px solid;
+  padding: 5px;
+  margin-right: 5px;
+  margin-bottom: 2px;
+  margin-top: 2px;
+  margin-left: 5px;
+  border-radius: 5px;
+  z-index: 1;
+  box-shadow: inset 0 0 5px 1px var(--clr-neon), 0 0 5px 0 var(--clr-neon);
+  position: relative;
+}
+
+.CardWrapper button:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 5px;
+  box-shadow: 0 0 2em 0.5em var(--clr-neon);
+  opacity: 0;
+  background-color: var(--clr-neon);
+  z-index: -1;
+  transition: opacity 100ms linear;
+}
+
+.CardWrapper button:hover {
+  color: var(--clr-bg);
+  text-shadow: none;
+}
+
+.CardWrapper button:hover:after {
+  opacity: 1;
+}

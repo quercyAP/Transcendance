@@ -1,0 +1,11 @@
+volumes/frontend.volume/node_modules
+
+volumes/backend_game.volume/node_modules
+volumes/backend_game.volume/dist
+
+volumes/frontend.volume/.next
+volumes/backend.volume/node_modules
+volumes/backend.volume/dist
+volumes/backend.volume/upload
+
+volumes/db.volume

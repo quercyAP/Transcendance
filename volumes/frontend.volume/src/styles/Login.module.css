@@ -1,0 +1,87 @@
+.Container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    border-radius: 20px;
+    background: rgba(0, 19, 43, 0.9);
+    box-shadow: inset 0 2px 5px var(--clr-neon), 0 -2px 5px var(--clr-neon),
+      inset 0 -3px 5px 0.5px rgb(0, 217, 224);
+}
+
+.Container::before {
+    content: "";
+    position: relative;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    box-shadow: 0 2px 5px rgb(0, 217, 224), 0 2px 5px rgb(0, 217, 224),
+      0px 0 30px rgb(255, 20, 189);
+    background: linear-gradient(
+      150deg,
+      rgba(255, 20, 189, 0.7) 0%,
+      rgba(255, 20, 189, 1) 30%,
+      rgba(255, 255, 255, 0.8) 70%,
+      rgba(162, 224, 226, 1) 75%
+    );
+    border-radius: 20px;
+    z-index: -1; 
+}
+
+.Box {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    padding: 2vh;
+    border-radius: 20px;
+    background: rgba(0, 19, 43, 0.9);
+    box-shadow: inset 0 2px 5px var(--clr-neon),
+      inset 0 -3px 5px 0.5px rgb(0, 217, 224);
+}
+
+.Button {
+    cursor: pointer;
+    color: #ffeab5;
+    font-size: 1em;
+    border: var(--clr-neon) 2px solid;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px 0 var(--clr-neon), 0 0 10px 0 var(--clr-neon);
+    position: relative;
+    z-index: 1;
+}
+
+.Button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 5px;
+    box-shadow: 0 0 2em 0.5em var(--clr-neon);
+    opacity: 0;
+    background-color: var(--clr-neon);
+    z-index: -1;
+    transition: opacity 100ms linear;
+}
+
+.Button:hover {
+    color: var(--clr-bg);
+    text-shadow: none;
+}
+
+.Button:hover::after {
+    opacity: 1;
+}
+
+@media (max-width: 425px) {
+    .Container {
+        width: 50vw;
+    }
+  }

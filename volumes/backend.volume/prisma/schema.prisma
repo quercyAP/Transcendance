@@ -1,0 +1,115 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 Int                   @id
+  createdAt          DateTime              @default(now())
+  updatedAt          DateTime              @updatedAt
+  name               String                @unique @default(cuid())
+  name42             String?
+  email              String                @unique @default(cuid())
+  avatarUrl          String?
+  avatar42Url        String?
+  is2FAEnabled       Boolean               @default(false)
+  isOnline           Boolean               @default(false)
+  isOnGame           Boolean               @default(false)
+  channels           ChannelSubscription[]
+  sentMessages       Message[]             @relation("sender")
+  receivedMessages   Message[]             @relation("receiver")
+  friends            User[]                @relation("friends")
+  friendRelation     User[]                @relation("friends")
+  blockedUsers       User[]                @relation("blockedUsers")
+  blockedBy          User[]                @relation("blockedUsers")
+  bannedChannels     Channel[]             @relation("banList")
+  pendingFriendSent  User[]                @relation("pendingFriends")
+  pendingFriendRecev User[]                @relation("pendingFriends")
+  secretToken        String                @unique @default(cuid())
+  winnerMatches      MatchHistory[]        @relation("winnerMatches") 
+  loserMatches       MatchHistory[]        @relation("loserMatches")
+}
+
+model ChannelSubscription {
+  createdAt DateTime                  @default(now())
+  updatedAt DateTime                  @updatedAt
+  user      User                      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  channel   Channel                   @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  channelId Int
+  roles     ChannelSubscriptionRole[]
+  isMuted   Boolean                   @default(false)
+  unMuteAt  DateTime?
+  //   isBanned  Boolean                   @default(false)
+
+  @@id([userId, channelId])
+}
+
+model Channel {
+  id          Int                   @id @default(autoincrement())
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
+  name        String                @unique @default(cuid())
+  users       ChannelSubscription[]
+  messages    Message[]
+  type        ChannelType           @default(PUBLIC)
+  password    String?
+  bannedUsers User[]                @relation("banList")
+}
+
+model Message {
+  id         Int         @id @default(autoincrement())
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  content    String?
+  type       MessageType
+  sender     User        @relation(name: "sender", fields: [senderId], references: [id], onDelete: Cascade)
+  senderId   Int
+  receiver   User?       @relation(name: "receiver", fields: [receiverId], references: [id], onDelete: Cascade)
+  receiverId Int?
+  channel    Channel?    @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  channelId  Int?
+}
+
+model MatchHistory {
+  id            Int       @id @default(autoincrement())
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  winnerScore   Int
+  loserScore    Int
+  winnerId      Int
+  winner        User      @relation(name: "winnerMatches", fields: [winnerId], references: [id])
+  loserId       Int
+  loser         User      @relation(name: "loserMatches", fields: [loserId], references: [id])
+
+  @@map("MatchHistories")
+}
+
+enum ChannelSubscriptionRole {
+  OWNER
+  ADMIN
+
+  @@map("ChannelSubscriptionRoleEnum")
+}
+
+enum ChannelType {
+  PUBLIC
+  PRIVATE
+  PROTECTED
+
+  @@map("ChannelTypeEnum")
+}
+
+enum MessageType {
+  DIRECT
+  CHANNEL
+
+  @@map("MessageStatusEnum")
+}

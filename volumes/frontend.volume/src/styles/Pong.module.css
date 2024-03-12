@@ -1,0 +1,85 @@
+.Pong {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  white-space: nowrap;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  background: rgba(0, 19, 43, 1);
+  border-radius: 20px;
+  box-shadow: inset 0 2px 5px var(--clr-neon), 0 -2px 5px var(--clr-neon),
+    inset 0 -3px 5px 0.5px rgb(0, 217, 224), 0 3px 5px 0.5px rgb(0, 217, 224);
+}
+
+.gameHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 20px;
+  margin-bottom: 20px;
+}
+
+.Box {
+  flex: 1 1 auto;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  width: 1vw;
+  margin: 0 1vw;
+
+}
+
+.Before {
+  top: -2px;
+  left: -2px;
+  bottom: -2px;
+  right: -2px;
+  box-shadow: 0 5px 10px rgb(0, 217, 224), 0px 0 10px rgb(0, 217, 224);
+  background: linear-gradient(0deg,
+      rgba(255, 255, 255, 0.8) 70%,
+      rgba(162, 224, 226, 1) 75%);
+  border-radius: 20px;
+  z-index: -1;
+  width: 300px;
+}
+
+.Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-grow: 1;
+  width: 100%;
+  color: #ffeab5;
+  position: relative;
+  padding-top: 0.5vh;
+  padding-bottom: 0.5vh;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  border-radius: 20px;
+  background: rgba(0, 19, 43, 1);
+  box-shadow: inset 0 2px 5px rgb(0, 217, 224);
+}
+
+.text {
+  font-size: 1.5vw;
+  font-weight: 700;
+  text-align: center;
+}
+
+.globalHeader {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  white-space: nowrap;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  transform: translateY(-62%);
+  }

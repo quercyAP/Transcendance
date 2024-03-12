@@ -1,0 +1,127 @@
+version: "3.9"
+services:
+  reverse-proxy:
+    container_name: reverse-proxy
+    build: docker/reverse-proxy
+    image: reverse-proxy
+    env_file: .env
+    depends_on:
+      - frontend
+      - backend
+    ports:
+      - 4000:443
+      - 4001:80
+    networks:
+      transcendance:
+        ipv4_address: 172.16.238.11
+    restart: unless-stopped
+
+  db:
+    container_name: db
+    image: postgres:16
+    env_file: .env
+    # ports:
+    #   - 5432:5432
+    networks:
+      transcendance:
+        ipv4_address: 172.16.238.12
+    volumes:
+      - db:/var/lib/postgresql/data
+    # command: /bin/bash -c "tail -f"
+    restart: unless-stopped
+
+  backend_game:
+    container_name: backend_game
+    image: "node:20"
+    user: "root"
+    working_dir: /home/backend_game
+    env_file: .env
+    networks:
+      transcendance:
+        ipv4_address: 172.16.238.22
+    volumes:
+      - backend_game:/home/backend_game
+    expose:
+      - 3003
+    command: /bin/bash -c "if [ \"$NODE_ENV\" = 'production' ]; then npm install -g @nestjs/cli && npm install && npm run build && npm run start:prod; else npm install && npm run start:dev; fi"
+    # command: /bin/bash -c "tail -f"
+    restart: unless-stopped
+
+  frontend:
+    container_name: frontend
+    image: "node:20"
+    user: "root"
+    working_dir: /home/frontend
+    env_file: .env
+    networks:
+      transcendance:
+        ipv4_address: 172.16.238.13
+    volumes:
+      - frontend:/home/frontend
+    expose:
+      - 3000
+    # command: /bin/bash -c "npm install && npm run dev"
+    command: /bin/bash -c "if [ \"$NODE_ENV\" = 'production' ]; then npm install && npm run build && npm run build && npm run start; else npm install && npm run dev; fi"
+    restart: unless-stopped
+
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      transcendance:
+        ipv4_address: 172.16.238.14
+
+  backend:
+    container_name: backend
+    image: "node:20"
+    user: "root"
+    working_dir: /home/backend
+    env_file: .env
+    networks:
+      transcendance:
+        ipv4_address: 172.16.238.15
+    volumes:
+      - backend:/home/backend
+    expose:
+      - 3001
+    command: /bin/bash -c "if [ \"$NODE_ENV\" = 'production' ]; then npm install -g @nestjs/cli && npm install && npm run build && npx prisma generate && npx prisma migrate deploy && npm run start:prod; else npm install && npx prisma generate && npx prisma migrate deploy && npm run start:dev; fi"
+    # command: /bin/bash -c "tail -f"
+    restart: unless-stopped
+
+volumes:
+  db:
+    driver: local
+    driver_opts:
+      type: none
+      device: volumes/db.volume
+      o: bind
+  frontend:
+    driver: local
+    driver_opts:
+      type: none
+      device: volumes/frontend.volume
+      o: bind
+  backend_game:
+    driver: local
+    driver_opts:
+      type: none
+      device: volumes/backend_game.volume
+      o: bind
+  backend:
+    driver: local
+    driver_opts:
+      type: none
+      device: volumes/backend.volume
+      o: bind
+
+networks:
+  transcendance:
+    # driver: bridge
+    # name: transcendance
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.238.0/24

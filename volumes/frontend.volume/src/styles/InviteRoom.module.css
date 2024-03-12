@@ -1,0 +1,127 @@
+.Box {
+  /* position: relative; */
+  position: absolute;
+  bottom: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding-top: 0vh;
+  padding-bottom: 0vh;
+  padding-left: 0vh;
+  padding-right: 0vh;
+  border-radius: 20px;
+  width: 280px;
+}
+
+.Before {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  bottom: -2px;
+  right: -2px;
+  box-shadow:
+  0 5px 10px rgb(0, 217, 224),
+  0px 0 10px rgb(0, 217, 224);
+  background: linear-gradient(0deg,
+  rgba(255, 255, 255, 0.8) 70%,
+  rgba(162, 224, 226, 1) 75%);
+  border-radius: 20px;
+  z-index: -1; 
+}
+
+.Container {
+  display: flex;
+  flex-direction: column;
+  color: #ffeab5;
+  position: relative;
+  padding-top: 1.5vh;
+  padding-bottom: 2vh;
+  padding-left: 1.5vw;
+  padding-right: 1.5vw;
+  border-radius: 20px;
+  background: rgba(0, 19, 43, 1);
+  box-shadow: inset 0 2px 5px rgb(0, 217, 224);
+}
+
+
+.Container p {
+padding-top: 1px;
+font-size: 0.7rem;
+}
+
+.Text {
+  text-align: center;
+  text-shadow: 0 0 2px black;
+}
+
+.Container input[type="text"] {
+width: 100%;
+padding: 5px;
+margin-top: 0.5rem;
+background: transparent;
+color: black;
+outline: none;
+font-size: 0.6rem;
+transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+border-bottom: #000 1px solid;
+text-shadow: 0 0 2px black;
+}
+
+.Container input[type="text"]:focus {
+border-color: var(--clr-neon);
+}
+
+.Find {
+  margin-bottom: 0.5rem;
+
+}
+
+.Container button {
+cursor: pointer;
+color: #ffeab5;
+font-size: 0.6em;
+border: var(--clr-neon) 1px solid;
+padding: 5px;
+margin-left: 5px;
+margin-bottom: 2px;
+border-radius: 5px;
+z-index: 1;
+box-shadow: inset 0 0 5px 1px var(--clr-neon), 0 0 5px 0 var(--clr-neon);
+position: relative;
+}
+
+.Container button:after {
+content: "";
+position: absolute;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+border-radius: 5px;
+box-shadow: 0 0 2em 0.5em var(--clr-neon);
+opacity: 0;
+background-color: var(--clr-neon);
+z-index: -1;
+transition: opacity 100ms linear;
+}
+
+.Container button:hover {
+color: var(--clr-bg);
+text-shadow: none;
+}
+
+.Container button:hover:after {
+opacity: 1;
+}
+
+.activeButton {
+color: var(--clr-bg) !important;
+text-shadow: none !important;
+}
+
+.activeButton:after {
+opacity: 1 !important;
+}
+
+.speed option:checked {
+  color: black;
+}

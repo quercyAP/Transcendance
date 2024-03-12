@@ -1,0 +1,119 @@
+.Container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  background: rgba(0, 19, 43, 1);
+  box-shadow: inset 0 2px 5px rgb(0, 217, 224);
+}
+
+.Container::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  box-shadow: 0 5px 10px rgb(240, 7, 129), 0 5px 10px rgb(0, 217, 224),
+    0px 0 10px rgb(0, 217, 224);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 30, 146, 0.7) 0%,
+    rgba(255, 255, 255, 0.8) 70%,
+    rgba(162, 224, 226, 1) 75%
+  );
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  z-index: -1;
+}
+
+.NavBar {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+}
+
+.LeftAligned {
+  display: flex;
+  position: absolute;
+  left: 45px;
+}
+
+.CenteredButton {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  gap: 1rem;
+  padding: 0.5rem;
+  position: relative;
+  z-index: 0;
+}
+
+.NavButton {
+  cursor: pointer;
+  color: var(--clr-neon);
+  border: var(--clr-neon) 2px solid;
+  padding: 5px;
+  border-radius: 5px;
+  width: 40px;
+  height: 40px;
+  box-shadow: inset 0 0 10px 0 var(--clr-neon), 0 0 10px 0 var(--clr-neon);
+  position: relative;
+}
+
+.NavButton::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0 0 2em 0.5em var(--clr-neon);
+  opacity: 0;
+  background-color: var(--clr-neon);
+  z-index: -1;
+  transition: opacity 100ms linear;
+}
+
+.NavButton:hover,
+.NavButton:focus {
+  color: var(--clr-neon);
+  border: var(--clr-neon) 2px solid;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: inset 0 0 10px 0 var(--clr-neon), 0 0 10px 0 var(--clr-neon);
+  position: relative;
+}
+
+.NavButton:hover::after {
+  opacity: 1;
+}
+
+.ScrollableImageList {
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 0 8px 0px var(--clr-neon), 0 0 10px 0 var(--clr-neon);
+  border: 2px solid var(--clr-neon);
+  height: 42px;
+  padding-left: 5px;
+  border-radius: 5px;
+  max-width: 182px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.ImageItem {
+  flex: none;
+  margin-right: 5px;
+  width: 30px !important;
+  height: auto;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .NavBar {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+}
