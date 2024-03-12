@@ -24,10 +24,10 @@ docker-compose up --build
 ```
 
 ## Caractéristiques
-Jeu en temps réel : Les utilisateurs peuvent jouer à Pong en temps réel.
-Chat : Création de channels publics, privés, ou protégés par mot de passe, envoi de messages directs, et gestion des utilisateurs (bloquer, administrer).
-Authentification : Connexion via le système OAuth de l'intranet 42/GitHub et possibilité d'activer l'authentification à deux facteurs avec google authenticator.
-Profil utilisateur : Affichage de statistiques, d'un avatar (téléchargeable ou par défaut), et d'un historique de matchs.
+- Jeu en temps réel : Les utilisateurs peuvent jouer à Pong en temps réel.
+- Chat : Création de channels publics, privés, ou protégés par mot de passe, envoi de messages directs, et gestion des utilisateurs (bloquer, administrer).
+- Authentification : Connexion via le système OAuth de l'intranet 42/GitHub et possibilité d'activer l'authentification à deux facteurs avec google authenticator.
+- Profil utilisateur : Affichage de statistiques, d'un avatar (téléchargeable ou par défaut), et d'un historique de matchs.
 
 ## Sécurité
 Tous les mots de passe sont chiffrés dans la base de données.
