@@ -1,5 +1,7 @@
 .Box {
-  position: relative;
+  position: fixed;
+  bottom: 0;
+  left: 0;
   width: 290px;
 }
 
@@ -165,6 +167,8 @@ overflow-y: auto;
 overflow-x: hidden;
 scrollbar-width: thin;
 scrollbar-color: var(--clr-neon) transparent;
+
+@apply h-[150px] lg:h-[200px];
 }
 
 /* Styles de barre de défilement pour Webkit (Chrome, Safari) */

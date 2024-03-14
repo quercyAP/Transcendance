@@ -13,8 +13,6 @@
 
   @apply border-t rounded-2xl h-[150px] w-[200px] flex flex-col;
 
-  @apply md:h-[200px] md:w-[400px] ;
-
   @apply lg:h-[300px] lg:w-[600px] ;
 }
 

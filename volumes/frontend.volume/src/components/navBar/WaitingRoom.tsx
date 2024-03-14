@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 import css from "../../styles/WaitingRoom.module.css";
 import { useNavRef } from "../../context/navContext";
 import { Socket } from "socket.io-client";
-import { stat } from "fs";
-import { is } from '@react-three/fiber/dist/declarations/src/core/utils';
 
 
 interface Props {

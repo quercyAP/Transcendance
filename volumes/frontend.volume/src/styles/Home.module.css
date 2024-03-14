@@ -60,27 +60,6 @@
   box-shadow: inset 0 2px 5px rgb(0, 217, 224);
 }
 
-
-.pong {
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  top: 25%;
-  left: 25%;
-  width: 50%;
-  height: 50%;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 19, 43, 1) 0%,
-    rgba(0, 19, 43, 1) 20%,
-    rgba(0, 19, 43, 1) 80%,
-    rgba(0, 19, 43, 1) 100%
-  );
-  border-radius: 20px;
-  box-shadow: inset 0 2px 5px var(--clr-neon), 0 -2px 5px var(--clr-neon),
-    inset 0 -3px 5px 0.5px rgb(0, 217, 224), 0 3px 5px 0.5px rgb(0, 217, 224);
-}
-
 .chatroom {
   display: flex;
   position: absolute;
@@ -103,6 +82,7 @@
   bottom: 0;
   left: 0.5%;
   width: 99%;
+  z-index: 10;
 }
 
 .loginform {
@@ -135,11 +115,12 @@
 }
 
 .ChatComponent {
-  position: absolute;
+  position: fixed;
   display: flex;
   justify-content: center;
   bottom: -400px;
   left: 20px;
+  z-index: 10;
 }
 
 .gameButton {
@@ -150,6 +131,14 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: -1;
+}
+
+.waitingRoom {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99;
 }
 
 .matchHistory {

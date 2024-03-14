@@ -1,5 +1,6 @@
 "use client";
 import css from "../styles/Home.module.css";
+import loginCss from "../styles/Login.module.css";
 import UserCard from "../components/UserCard";
 import ChatRoomList from "../components/channel/ChatRoomList";
 import NavBar from "../components/navBar/NavBar";
@@ -124,7 +125,7 @@ const Home = () => {
       gameSocketService.current = gameSocket;
 
       // A mettre en prod
-      gameSocketService.current?.onDisconnect(router);
+      // gameSocketService.current?.onDisconnect(router);
 
 
       gameSocketService.current?.onMatchStarted(
@@ -136,11 +137,11 @@ const Home = () => {
         setIsInviting,
         setShowStartButton,
         showWaitingRoom);
-        apiService.setOnGame(me.id, false);
+      apiService.setOnGame(me.id, false);
     });
 
 
- 
+
     apiService.fetchUsers().then((users) => setPublicUsers(users));
     apiService.getMyBlockedUsers().then((blocked) => setBlockedUser(blocked));
     apiService
@@ -243,19 +244,16 @@ const Home = () => {
         <NavBar socket={chatSocketService.current?.getSocket()} />
       </div>
       {showStartButton && (
-        <div className={`${css.Box}`}>
-          <div className={`${css.Before}`}>
-            <div className={`${css.Container}`}>
+        <div className={`${loginCss.Container}`}>
+            <div className={`${loginCss.Before}`}>
               <button
 
-                style={{ fontSize: "30px", padding: "10px" }}
-                className="text-white"
+                className={`${loginCss.Button}`}
                 onClick={handleStartClick}
               >
-                Start
+                PLAY
               </button>
             </div>
-          </div>
         </div>
       )}
 

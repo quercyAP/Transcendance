@@ -5,7 +5,7 @@ import { Draggable } from "gsap/Draggable";
 import { useRef, useEffect, useState, FormEvent, ChangeEvent } from "react";
 import { useNavRef } from "../../context/navContext";
 import ChannelForm from "./ChannelForm";
-import { createChannel, GetPublicChannel, ChannelType } from "../../services/ApiServiceDto";
+import { createChannel, GetPublicChannel } from "../../services/ApiServiceDto";
 import ApiService from "../../services/ApiService";
 
 const ChatRoomList = () => {

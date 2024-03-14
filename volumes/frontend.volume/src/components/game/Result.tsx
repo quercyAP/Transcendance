@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import css from "../../styles/WaitingRoom.module.css";
+import css from "../../styles/Result.module.css";
 import { useNavRef } from "../../context/navContext";
 
 interface ResultProps {

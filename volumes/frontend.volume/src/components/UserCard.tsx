@@ -23,6 +23,7 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
   const [avatarUrl, setAvatarUrl] = useState("");
   const [achievement, setAchievement] = useState("noob");
   const draggableRef = useRef(null);
+  const dragHandleRef = useRef(null);
   const imageWidth = 80;
   const imageHeight = 80;
   const [stat, setStat] = useState<Stats>({
@@ -31,10 +32,10 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
     winRate: 0,
     totalMatches: 0,
   });
- 
+
   const { setShowUserCardsPublicUsers, clientBaseUrl } =
     useNavRef();
-    const apiService = new ApiService(clientBaseUrl);
+  const apiService = new ApiService(clientBaseUrl);
 
   const fetchUserData = async () => {
     let avatar;
@@ -48,16 +49,16 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
 
   const getMatchStats = (history: MatchHistory | null): { victories: number; defeats: number; winRate: number, totalMatches: number } => {
     if (!history) {
-      return { victories: 0, defeats: 0, winRate: 0, totalMatches: 0};
+      return { victories: 0, defeats: 0, winRate: 0, totalMatches: 0 };
     }
     const victories = history.winnerMatches.length;
     const defeats = history.loserMatches.length;
     const totalMatches = victories + defeats;
     if (totalMatches === 0) {
-      return { victories: 0, defeats: 0, winRate: 0, totalMatches: 0};
+      return { victories: 0, defeats: 0, winRate: 0, totalMatches: 0 };
     }
     const winRate = (victories / totalMatches) * 100;
-  
+
     return { victories, defeats, winRate, totalMatches };
   };
 
@@ -67,7 +68,7 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
     setStat(stat);
   }
 
-  const getAchievement = (userstat:Stats) => {
+  const getAchievement = (userstat: Stats) => {
     let newAchievement: string;
     if (userstat.winRate >= 80) {
       newAchievement = "pro";
@@ -98,6 +99,7 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
       type: "x,y",
       bounds: window,
       edgeResistance: 0.5,
+      trigger: dragHandleRef.current,
     })[0];
     const handleResize = () => {
       draggableInstance.applyBounds(window);
@@ -116,6 +118,7 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
     <>
       {
         <div className={`${css.CardWrapper}`} ref={draggableRef}>
+          <div ref={dragHandleRef} className="absolute top-0 lg:h-[60px] h-[40px] w-full left-0"></div>
           <img
             className={css.Avatar}
             src={avatarUrl}
@@ -126,7 +129,7 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
           <h3 className={`${css.UserName}`}>{user?.name}</h3>
           <h3 className={`${css.Title}`}>{achievement}</h3>
           <div className={`${css.StatList}`}>
-          
+
             <p className={`${css.UserStats}`}>Victories: {stat.victories}</p>
             <p className={`${css.UserStats}`}>Defeats: {stat.defeats}</p>
             <p className={`${css.UserStats}`}>Winrate: {Math.ceil(stat.winRate).toString() + "%"}</p>

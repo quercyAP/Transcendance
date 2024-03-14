@@ -1,12 +1,9 @@
 "use client";
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import css from '../../styles/InviteRoom.module.css';
 import { useNavRef } from '../../context/navContext';
 import { Socket } from "socket.io-client";
-import { stat } from 'fs';
 import ApiService from '../../services/ApiService';
-import { getUnpackedSettings } from 'http2';
-
 
 interface Props {
   matchStarted: boolean | null;
@@ -138,14 +135,12 @@ const InviteRoom: React.FC<Props> = ({ matchStarted, setMatchStarted, socket }) 
           <>
             <div className={`${css.Text}`}>You just received an invite to play with {hostName} </div>
             <button
-              style={{ fontSize: "40px", padding: "10px" }}
               className="text-white"
                 onClick={handleAccept}
               >
               ACCEPT
             </button>
               <button
-                style={{ fontSize: "20px", padding: "10px" }}
                 className="text-white"
                 onClick={handleDecline}
               >

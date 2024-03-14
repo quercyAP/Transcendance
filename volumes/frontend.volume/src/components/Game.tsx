@@ -28,7 +28,7 @@ const Game = ({
   const [Player1, setPlayer1] = useState<string>(""); // Player 1 ID
   const [Player2, setPlayer2] = useState<string>(""); // Player 2 ID
   const [move, setMove] = useState<number>(0);
-  const [isMouseControl, setIsMouseControl] = useState<boolean>(true);
+  const [isMouseControl, setIsMouseControl] = useState<boolean>(false);
   const [showGrid, setShowGrid] = useState<boolean>(true);
   const [showResult, setShowResult] = useState<boolean>(false);
   const [result, setResult] = useState<any>(null);
@@ -37,7 +37,6 @@ const Game = ({
 
   const frameIdRef = useRef<number>(0);
   const {
-    showChat,
     setShowChat,
     setShowGame,
     showGame,
@@ -47,6 +46,14 @@ const Game = ({
   } = useNavRef();
   const [isWinner, setIsWinner] = useState<boolean>(false);
   const apiService = new ApiService(clientBaseUrl);
+
+  const truncateString = (str: string) => {
+    if (str.length > 20) {
+      return str.substring(0, 11 - 3) + '...';
+    } else {
+      return str;
+    }
+  }
 
   useEffect(() => {
     const updateGame = () => {
@@ -134,15 +141,27 @@ const Game = ({
       }
     };
 
+    const handleTouchMove = (event: TouchEvent) => {
+      event.preventDefault();
+
+      if (event.touches.length > 0) {
+        const touchY = event.touches[0].clientY;
+        const move = (touchY / window.innerHeight - 0.5) * 2;
+        setMove(move);
+      }
+    };
+
     window.addEventListener("mousemove", handleMouse);
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
+    window.addEventListener("touchmove", handleTouchMove, { passive: false });
     apiService.setOnGame(id!.id, true);
     setWinHeight(window.innerHeight);
     return () => {
       window.removeEventListener("mousemove", handleMouse);
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
+      window.removeEventListener("touchmove", handleTouchMove);
       socket!.off("gameState");
       socket!.off("matchEnded");
       apiService.setOnGame(id!.id, false);
@@ -151,8 +170,8 @@ const Game = ({
 
   useEffect(() => {
     if (status) {
-      getProperName(status.idPlayer1).then((res) => setPlayer1(res.name));
-      getProperName(status.idPlayer2).then((res) => setPlayer2(res.name));
+      getProperName(status.idPlayer1).then((res) => setPlayer1(truncateString(res.name)));
+      getProperName(status.idPlayer2).then((res) => setPlayer2(truncateString(res.name)));
     }
   }, [status]);
 
@@ -186,7 +205,7 @@ const Game = ({
 
   return (
     <>
-      ```   <div className={`${css.globalHeader}`}>
+      <div className={`${css.globalHeader}`}>
         <div className={`${css.gameHeader}`}>
           <div className={`${css.Box}`}>
             <div className={`${css.Before}`}>

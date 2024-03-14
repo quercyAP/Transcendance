@@ -65,18 +65,39 @@ const ChatComponent = ({ socket, messages }: { socket: SocketService | undefined
         setShowWaitingRoom,
         setShowStartButton,
         setIsInviting,
+        listRef,
     } = useNavRef();
     const [channelType, setChannelType] = useState(activeChannel.type);
     let tl = gsap.timeline();
     const [isWhisper, setIsWhisper] = useState(false);
 
+    const updatePosition = () => {
+        if (listRef.current && chatComponentRef.current) {
+          const listRect = listRef.current.getBoundingClientRect();
+          const chatRect = chatComponentRef.current.getBoundingClientRect();
+          let x = listRect.left + listRect.width / 2 - chatRect.width / 2 + 60;
+
+          gsap.set(chatComponentRef.current, {
+            x: x,
+            y: -460,
+          });
+        }
+      };
+
     useEffect(() => {
-        if (chatComponentRef.current) {
+        if (chatComponentRef.current && listRef.current) {
+            const listRect = listRef.current.getBoundingClientRect();
+            const chatRect = chatComponentRef.current.getBoundingClientRect();
+            let x = listRect.left + listRect.width / 2 - chatRect.width / 2 + 60;
             if (!tl.isActive()) {
                 tl = gsap.timeline();
                 if (chatComponentRef.current) {
-                    tl.to(
+                    tl.fromTo(
                         chatComponentRef.current,
+                        {
+                            x: x,
+                            y: chatRect.height,
+                        },
                         {
                             y: "-460",
                             duration: 0.2,
@@ -90,6 +111,10 @@ const ChatComponent = ({ socket, messages }: { socket: SocketService | undefined
             setSelectedUser(activeChannel.users.find((user: ChannelUsers) => user.userId !== currentUser?.id));
         }
         setSelectPublicUser(publicUsers.find((user: PublicUser) => user.id !== currentUser?.id));
+        window.addEventListener("resize", updatePosition);
+        return () => {
+            window.removeEventListener("resize", updatePosition);
+        };
     }, []);
 
     useEffect(() => {
@@ -266,8 +291,8 @@ const ChatComponent = ({ socket, messages }: { socket: SocketService | undefined
 
     const handleInvite = (user: ChannelUsers) => {
         if (user.isOnline === false) {
-          alert("You can't invite someone who is offline!");
-          return;
+            alert("You can't invite someone who is offline!");
+            return;
         }
 
         if (currentUser?.isOnGame) {
@@ -293,7 +318,7 @@ const ChatComponent = ({ socket, messages }: { socket: SocketService | undefined
     }
 
     return (
-        <div className={`${css.Box}`} ref={chatComponentRef}>
+        <div className={`${css.Box}z-10`} ref={chatComponentRef}>
             <div className={`${css.Before}`}></div>
             <div className={`${css.Container}`}>
                 {!isWhisper ? (
@@ -417,7 +442,7 @@ const ChatComponent = ({ socket, messages }: { socket: SocketService | undefined
                             <select
                                 className='text-base text-gray-700 placeholder-gray-600 border rounded-lg'
                                 value={selectPublicUser?.name}
-                                onChange={(e) => {setSelectPublicUser(publicUsers.find((user: PublicUser) => user.name === e.target.value))}}
+                                onChange={(e) => { setSelectPublicUser(publicUsers.find((user: PublicUser) => user.name === e.target.value)) }}
                             >
                                 {publicUsers.map((user: PublicUser) => (
                                     user.id !== currentUser?.id &&

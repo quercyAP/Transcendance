@@ -41,10 +41,18 @@ const Profile = () => {
     if (userButtonRef.current && profileRef.current) {
       const buttonRect = userButtonRef.current.getBoundingClientRect();
       const profileRect = profileRef.current.getBoundingClientRect();
+      let x = buttonRect.left + buttonRect.width / 2 - profileRect.width / 2;
+      const maxX = window.innerWidth - profileRect.width;
+      if (x > maxX) {
+        x = maxX;
+      }
+      if (x < 0) {
+        x = 20;
+      }
 
       gsap.set(profileRef.current, {
-        x: buttonRect.x - profileRect.width / 2 + buttonRect.width / 2,
-        y: "-60",
+        x: x,
+        y: -60,
       });
     }
   };
@@ -60,17 +68,26 @@ const Profile = () => {
       }
       const buttonRect = userButtonRef.current.getBoundingClientRect();
       const profileRect = profileRef.current.getBoundingClientRect();
+      let x = buttonRect.left + buttonRect.width / 2 - profileRect.width / 2;
+      const maxX = window.innerWidth - profileRect.width;
+      if (x > maxX) {
+        x = maxX;
+      }
+      if (x < 0) {
+        x = 20;
+      }
+
       if (!tl.isActive()) {
         tl = gsap.timeline();
         if (profileRef.current) {
           tl.fromTo(
             profileRef.current,
             {
-              x: buttonRect.x - profileRect.width / 2 + buttonRect.width / 2,
+              x: x,
               y: profileRect.height,
             },
             {
-              y: "-60",
+              y: -60,
               duration: 0.2,
               ease: "power1.out",
             },

@@ -184,7 +184,7 @@ const Grid = ({ ballPosition, color, width, pos, divisionsX, bonusColision, bonu
             ballScreenPositionRef.current.lerp(screenPosition, delayFactor);
 
             shaderMaterialRef.current.uniforms.u_ballScreenPosition.value = ballScreenPositionRef.current
-            shaderMaterialRef.current.uniforms.u_resolution.value = new THREE.Vector2(size.width * 1.5, size.height * 1.5);
+            shaderMaterialRef.current.uniforms.u_resolution.value = new THREE.Vector2(size.width, size.height);
             shaderMaterialRef.current.uniforms.u_time.value = clock.getElapsedTime();
             setTime(clock.getElapsedTime());
             shaderMaterialRef.current.uniforms.u_ballPosition.value = ballPosition;

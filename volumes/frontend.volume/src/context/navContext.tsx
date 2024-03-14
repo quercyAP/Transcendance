@@ -52,6 +52,7 @@ interface NavContextType {
   setLocalChannels: React.Dispatch<React.SetStateAction<GetPrivateChannel[]>>;
   blinkingChannelId: number;
   setBlinkingChannelId: React.Dispatch<React.SetStateAction<number>>;
+  listRef: React.RefObject<HTMLDivElement>;
 
   //WaitingRoom
   showWaitingRoom: boolean;
@@ -64,8 +65,6 @@ interface NavContextType {
   setInvitationInfo: React.Dispatch<React.SetStateAction<inviteInfo | null>>;
   isInviting: boolean;
   setIsInviting: React.Dispatch<React.SetStateAction<boolean>>;
-
-
 
   //ShowGame
   showGame: boolean;
@@ -168,6 +167,7 @@ const navContext = createContext<NavContextType>({
   setShowChatComponent: () => {},
   activeChannel: null,
   setActiveChannel: () => {},
+  listRef: { current: null },
 
   blinkingChannelId: 0,
   setBlinkingChannelId: () => {},
@@ -257,6 +257,8 @@ export const NavProvider = ({ children }: { children: React.ReactNode }) => {
   const [showChatComponent, setShowChatComponent] = useState(false);
   const [activeChannel, setActiveChannel] = useState(null);
 
+  const listRef = useRef<HTMLDivElement>(null);
+
   const [showWaitingRoom, setShowWaitingRoom] = useState(false);
   const [showInviteRoom, setShowInviteRoom] = useState(false);
   const [invitationInfo, setInvitationInfo] = useState<inviteInfo | null>(null);
@@ -325,6 +327,7 @@ export const NavProvider = ({ children }: { children: React.ReactNode }) => {
     showChat,
     setShowChat,
     addChannel,
+    listRef,
     setAddChannel,
     userButtonRef,
     profileRef,

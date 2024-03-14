@@ -79,9 +79,3 @@
 .Button:hover::after {
     opacity: 1;
 }
-
-@media (max-width: 425px) {
-    .Container {
-        width: 50vw;
-    }
-  }

@@ -29,7 +29,7 @@ export default function Background({ children }:
         zIndex: -1
       }}></div>
 
-      <div className='container'>
+      <div className='Background'>
         <h1 className={`${css.title} ${agbalumo.className}`}>Transcendance</h1>
         {children}
       </div>

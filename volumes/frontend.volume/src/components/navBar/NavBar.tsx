@@ -9,7 +9,7 @@ import { Socket } from "socket.io-client";
 
 const NavBar = ({socket}: {socket: Socket | undefined}) => {
   return (
-    <div className={css.Container}>
+    <div className={css.Container} >
       <nav className={css.NavBar}>
         <div className={css.LeftAligned}>
           <ChannelList />

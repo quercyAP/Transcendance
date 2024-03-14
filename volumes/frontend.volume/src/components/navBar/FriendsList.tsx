@@ -8,7 +8,6 @@ import { PublicUser } from "../../services/ApiServiceDto";
 import { createPrivateChannel, createChannelUser } from "../../lib/whisper";
 import { Socket } from "socket.io-client";
 import { CurrentUser } from "../../services/ApiServiceDto";
-import { is } from "@react-three/fiber/dist/declarations/src/core/utils";
 
 const FriendsList = ({
   socket,
@@ -93,6 +92,7 @@ const FriendsList = ({
       }
       const buttonRect = friendButtonRef.current.getBoundingClientRect();
       const friendsListRect = friendsListRef.current.getBoundingClientRect();
+      
       if (!tl.isActive()) {
         tl = gsap.timeline();
         if (friendsListRef.current) {
@@ -192,7 +192,7 @@ const FriendsList = ({
   const isActive = (mode: string) => filterMode === mode;
 
   return (
-    <div className={`${css.Box}`} ref={friendsListRef}>
+    <div className={`${css.Box} z-10`} ref={friendsListRef}>
       <div className={`${css.Before}`}></div>
       <div className={`${css.Container}`}>
         <div className={`${css.Text}`}>Community</div>

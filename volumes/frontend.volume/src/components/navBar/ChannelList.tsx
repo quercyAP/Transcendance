@@ -18,7 +18,7 @@ const ChannelList = () => {
   const {
     chatComponentRef, setShowChatComponent,
     showChatComponent, toggleMenu, setActiveChannel, activeChannel, clientBaseUrl,
-    addChannel, blinkingChannelId, channels, setChannels, localChannels
+    addChannel, blinkingChannelId, channels, setChannels, localChannels, listRef
 
   } = useNavRef();
   const imgRefs = useRef<any[]>([]);
@@ -151,11 +151,11 @@ const ChannelList = () => {
   return (
     <>
       {channels.length > 0 && (
-        <div className={css.ScrollableImageList}>
+        <div className={css.ScrollableImageList} ref={listRef}>
           <Swiper
             modules={[Mousewheel]}
             spaceBetween={0}
-            slidesPerView={5}
+            slidesPerView={2}
             mousewheel={true}
             pagination={{ clickable: true }}
           >
